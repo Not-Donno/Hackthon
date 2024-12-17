@@ -1,11 +1,13 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
+import { Canvas } from "@react-three/fiber";
+import Earth from '../models/Earth.jsx'; // Import the Earth model component
 
 const Goal = () => {
   return (
     <div className="bg-green-600 text-white font-['Poppins']">
       {/* Hero Section */}
       <header className="h-screen flex justify-between items-center px-[5%] bg-gradient-to-b from-[#54c57f] to-[#4fea2c]">
-        <div className="max-w-[40%]">
+        <div className="max-w-[40%] z-10 relative">
           <h1 className="text-6xl mb-4">Protect Our Planet</h1>
           <p className="text-lg mb-5">
             Explore modern solutions to make Earth greener, healthier, and sustainable.
@@ -17,7 +19,15 @@ const Goal = () => {
             Explore our goals
           </a>
         </div>
-        <div className="w-1/2 h-full"></div>
+
+        {/* 3D Earth Model */}
+        <div className="w-1/2 h-full absolute top-0 right-0">
+          <Canvas camera={{ position: [0, 0, 4], fov: 50 }}>
+            <ambientLight intensity={0.3} />
+            <directionalLight position={[10, 10, 10]} intensity={1} />
+            <Earth /> {/* Render the Earth model */}
+          </Canvas>
+        </div>
       </header>
 
       {/* Solutions Section */}
