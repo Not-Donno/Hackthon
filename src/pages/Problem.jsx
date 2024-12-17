@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { MapContainer, TileLayer, Circle, Popup, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, Circle, Popup } from "react-leaflet";
 import { LatLngBounds } from "leaflet";
 import "leaflet/dist/leaflet.css";
 
@@ -9,7 +9,6 @@ const Problem = () => {
   const [hoveredCircle, setHoveredCircle] = useState(null);
   const [modalContent, setModalContent] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [map, setMap] = useState(null); // Track map instance
 
   const sections = [
     {
@@ -22,40 +21,24 @@ const Problem = () => {
             zoom={12}
             scrollWheelZoom={true}
             style={{ height: "100%", width: "100%" }}
-            whenCreated={setMap} // Save the map instance
           >
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
             {randomCirclePosition && (
               <Circle
                 center={randomCirclePosition}
-                radius={hoveredCircle ? 1000 : 500} // Increase radius when hovered
+                radius={hoveredCircle ? 1000 : 500}
                 color={hoveredCircle ? "blue" : "red"}
                 fillColor={hoveredCircle ? "blue" : "red"}
                 fillOpacity={0.2}
                 eventHandlers={{
-                  mouseover: () => {
-                    setHoveredCircle(true);
-                    if (map) map.setZoom(15); // Zoom in on hover
-                  },
-                  mouseout: () => {
-                    setHoveredCircle(false);
-                    if (map) map.setZoom(12); // Reset zoom level on mouseout
-                  },
-                  click: () => {
-                    openModal({
-                      title: "Pollution Problem in Kathmandu",
-                      problems: "Hover to zoom in and click to learn more.",
-                      causes: "",
-                      effects: "",
-                      solutions: "",
-                    });
-                  },
+                  mouseover: () => setHoveredCircle(true),
+                  mouseout: () => setHoveredCircle(false),
                 }}
               >
                 <Popup>
                   <div>
                     <h3>Pollution Problem in Kathmandu</h3>
-                    <p>Click to learn more.</p>
+                    <p>Hover to zoom in and click to learn more.</p>
                   </div>
                 </Popup>
               </Circle>
@@ -100,6 +83,91 @@ const Problem = () => {
             "Health crises like waterborne diseases, harm to aquatic life, and disruption of the ecosystem.",
           solutions:
             "Improving waste treatment facilities, promoting water conservation, and reducing plastic usage.",
+        },
+      ],
+    },
+    {
+      id: "climate-change",
+      title: "Climate Change",
+      subsections: [
+        {
+          title: "Climate Change",
+          problems:
+            "Rising global temperatures, extreme weather events, and sea-level rise threaten ecosystems and human populations.",
+          causes:
+            "Greenhouse gas emissions, deforestation, and industrial activities contribute significantly to climate change.",
+          effects:
+            "Global warming, melting ice caps, disrupted weather patterns, and the extinction of vulnerable species.",
+          solutions:
+            "Transitioning to renewable energy, reducing carbon emissions, and promoting environmental conservation efforts.",
+        },
+      ],
+    },
+    {
+      id: "overexploitation",
+      title: "Overexploitation",
+      subsections: [
+        {
+          title: "Overexploitation of Resources",
+          problems:
+            "Overuse of natural resources such as water, minerals, and fossil fuels is unsustainable.",
+          causes:
+            "Rapid industrial growth, population pressure, and insufficient management practices lead to overexploitation.",
+          effects:
+            "Resource depletion, ecosystem degradation, and loss of biodiversity.",
+          solutions:
+            "Implementing sustainable practices, promoting resource conservation, and using renewable resources.",
+        },
+      ],
+    },
+    {
+      id: "deforestation",
+      title: "Deforestation",
+      subsections: [
+        {
+          title: "Deforestation",
+          problems:
+            "Deforestation is causing the destruction of forests that act as carbon sinks and biodiversity hotspots.",
+          causes:
+            "Agricultural expansion, logging, and urbanization are major drivers of deforestation.",
+          effects:
+            "Loss of biodiversity, disruption of the carbon cycle, and increased greenhouse gas emissions.",
+          solutions:
+            "Promoting afforestation, enforcing stricter deforestation laws, and encouraging sustainable land management.",
+        },
+      ],
+    },
+    {
+      id: "overuse-chemicals",
+      title: "Overuse of Chemicals",
+      subsections: [
+        {
+          title: "Overuse of Chemicals",
+          problems:
+            "Excessive use of pesticides, herbicides, and fertilizers can contaminate water, soil, and air.",
+          causes:
+            "Industrial agriculture and unsustainable farming practices lead to the overuse of harmful chemicals.",
+          effects:
+            "Water contamination, soil degradation, and harm to human health and biodiversity.",
+          solutions:
+            "Adopting organic farming practices, reducing chemical use, and promoting eco-friendly alternatives.",
+        },
+      ],
+    },
+    {
+      id: "overpopulation-urbanization",
+      title: "Overpopulation and Urbanization",
+      subsections: [
+        {
+          title: "Overpopulation and Urbanization",
+          problems:
+            "Overpopulation strains resources, leading to overcrowded cities, poor living conditions, and increased pollution.",
+          causes:
+            "High birth rates, rural-to-urban migration, and inadequate urban planning contribute to overpopulation and urban sprawl.",
+          effects:
+            "Resource depletion, increased pollution, and social inequality.",
+          solutions:
+            "Promoting family planning, sustainable urban development, and improving infrastructure in growing cities.",
         },
       ],
     },
@@ -171,19 +239,10 @@ const Problem = () => {
               (section.subsections &&
                 section.subsections.map((sub, index) => (
                   <div
-                    className={`bg-white rounded-lg overflow-hidden mb-6 flex flex-col md:flex-row ${
-                      index % 2 === 0 ? "md:flex-row-reverse" : ""
-                    }`}
+                    className={`bg-white rounded-lg shadow-lg overflow-hidden mb-6 flex flex-col md:flex-row transition-transform transform hover:scale-105 hover:shadow-xl`} // Added shadow, scale and rounded-lg
                     key={index}
+                    onClick={() => openModal(sub)} // Open modal on click
                   >
-                    {sub.img && (
-                      <div
-                        className="w-full md:w-1/3"
-                        onClick={() => openModal(sub)}
-                      >
-                        {sub.img}
-                      </div>
-                    )}
                     <div className="p-4 flex-1">
                       <h3 className="text-xl font-bold text-gray-800 mb-2">
                         {sub.title}
@@ -204,27 +263,27 @@ const Problem = () => {
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
           <div className="bg-white p-8 rounded-lg w-1/2">
-            <h3 className="text-2xl font-bold text-gray-800">{modalContent.title}</h3>
-            <p className="text-gray-600 mt-4">
+            <h3 className="text-2xl font-bold text-gray-800 mb-4">
+              {modalContent.title}
+            </h3>
+            <p className="text-gray-700 mb-4">
               <b>Problems:</b> {modalContent.problems}
             </p>
-            <p className="text-gray-600 mt-2">
+            <p className="text-gray-700 mb-4">
               <b>Causes:</b> {modalContent.causes}
             </p>
-            <p className="text-gray-600 mt-2">
+            <p className="text-gray-700 mb-4">
               <b>Effects:</b> {modalContent.effects}
             </p>
-            <p className="text-gray-600 mt-2">
+            <p className="text-gray-700 mb-4">
               <b>Solutions:</b> {modalContent.solutions}
             </p>
-            <div className="mt-4 text-right">
-              <button
-                className="bg-red-600 text-white px-4 py-2 rounded-md"
-                onClick={closeModal}
-              >
-                Close
-              </button>
-            </div>
+            <button
+              className="bg-green-500 text-white px-4 py-2 rounded-md"
+              onClick={closeModal}
+            >
+              Close
+            </button>
           </div>
         </div>
       )}
