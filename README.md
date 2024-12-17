@@ -41,12 +41,3 @@ The project is organized into several components and pages, each serving a speci
 
 - **App.jsx**
   - The main application file that sets up the routing for the different pages using React Router. It also includes the Navbar and handles page transitions with AnimatePresence from Framer Motion.
-
-## Installation and Setup
-
-To get started with the project, follow these steps:
-
-1. **Clone the repository:**
-   ```sh
-   git clone https://github.com/your-repo/environmental-awareness.git
-   cd environmental-awareness
