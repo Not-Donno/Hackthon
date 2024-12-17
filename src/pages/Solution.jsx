@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const Solution = () => {
   const [selectedSolution, setSelectedSolution] = useState(null);
@@ -53,66 +53,87 @@ const Solution = () => {
     }
   ];
 
-  const handleClick = (solution) => {
-    setSelectedSolution(solution);
-  };
-
-  const closeModal = () => {
-    setSelectedSolution(null);
-  };
+  const handleClick = (solution) => setSelectedSolution(solution);
+  const closeModal = () => setSelectedSolution(null);
 
   return (
-    <div className="app bg-gray-50 p-12 md:p-36 pt-20">
-      <div className='flex justify-center'>
-        <header className="mt-12 mb-12">
-          <h1 className="text-3xl md:text-4xl font-semibold text-green-600 text-center">Solutions to Environmental Problems</h1>
-        </header>
-      </div>
+    <div className="bg-gradient-to-br from-green-50 to-gray-100 p-8 sm:p-16 min-h-screen">
+      {/* Header */}
+      <header className="text-center mb-12">
+        <h1 className="text-4xl md:text-5xl font-bold text-gray-800 leading-tight bg-gradient-to-r from-green-500 to-blue-500 text-transparent bg-clip-text">
+          Solutions to Environmental Problems
+        </h1>
+        <p className="mt-4 text-lg text-gray-600">Together, we can create a better, greener future.</p>
+      </header>
 
-      <div className="solutions grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 text-justify">
+      {/* Grid of Solutions */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
         {solutions.map((solution, index) => (
-          <section 
-            className="solution bg-white shadow-lg rounded-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl cursor-pointer" 
+          <div
             key={index}
+            className="group bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl flex flex-col sm:flex-row"
             onClick={() => handleClick(solution)}
           >
-            <div className="heading-with-image relative">
+            {/* Image on Left */}
+            <div className="w-full sm:w-1/2">
               <img
-                className="w-full h-56 object-cover rounded-t-lg"
                 src={solution.image}
                 alt={solution.title}
+                className="w-full h-60 object-cover sm:h-full"
               />
-              <h2 className="absolute bottom-4 left-4 text-xl text-white font-semibold bg-opacity-60 bg-black px-4 py-2 rounded-md">{solution.title}</h2>
             </div>
-            <div className="p-6">
-              <p className="text-gray-700 text-base">{solution.description}</p>
+
+            {/* Content on Right */}
+            <div className="p-6 flex flex-col justify-between w-full sm:w-1/2">
+              <h2 className="text-xl font-semibold text-gray-800 mb-2">
+                {solution.title}
+              </h2>
+              <p className="text-gray-700 mb-4">
+                {solution.description}
+              </p>
+              <button
+                onClick={() => handleClick(solution)}
+                className="self-start px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
+              >
+                See More
+              </button>
             </div>
-          </section>
+          </div>
         ))}
       </div>
 
+      {/* Modal */}
       {selectedSolution && (
-        <div className="modal fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="modal-content bg-white p-6 rounded-lg max-w-lg w-full overflow-y-auto h-96">
-            <h2 className="text-2xl font-semibold text-green-600">{selectedSolution.title}</h2>
-            <img 
-              className="w-full h-64 object-cover rounded-lg mt-4"
+        <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center p-4 sm:p-8">
+          <div className="bg-white rounded-lg shadow-lg max-w-3xl w-full p-8 relative animate-fade-in">
+            <button
+              onClick={closeModal}
+              className="absolute top-4 right-4 text-gray-600 hover:text-gray-800 text-2xl"
+            >
+              &times;
+            </button>
+            <h2 className="text-3xl font-bold text-green-600 mb-4">
+              {selectedSolution.title}
+            </h2>
+            <img
               src={selectedSolution.image}
               alt={selectedSolution.title}
+              className="w-full h-64 object-cover rounded-lg mb-6"
             />
-            <div className="overflow-y-auto mt-4 max-h-60">
-              <p className="text-gray-700">{selectedSolution.moreDetails}</p>
+            <p className="text-gray-700 leading-relaxed max-h-60 overflow-y-auto">
+              {selectedSolution.moreDetails}
+            </p>
+            <div className="mt-6 text-right">
+              <button
+                onClick={closeModal}
+                className="px-6 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition"
+              >
+                Close
+              </button>
             </div>
-            <button 
-              className="mt-4 px-6 py-2 bg-red-600 text-white rounded-md hover:bg-red-700"
-              onClick={closeModal}
-            >
-              Close
-            </button>
           </div>
         </div>
       )}
-
     </div>
   );
 };
