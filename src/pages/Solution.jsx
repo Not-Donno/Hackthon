@@ -11,7 +11,7 @@ const Solution = () => {
     },
     {
       title: "Sustainable Development",
-      image: "https://plus.unsplash.com/premium_photo-1661368421663-13b2d8115241?w=100&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8U3VzdGFpbmFibGUlMjBEZXZlbG9wbWVudHxlbnwwfHwwfHx8MA%3D%3D",
+      image: "https://plus.unsplash.com/premium_photo-1661368421663-13b2d8115241?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8U3VzdGFpbmFibGUlMjBEZXZlbG9wbWVudHxlbnwwfHwwfHx8MA%3D%3D",
       description: "Sustainable development balances economic growth, environmental protection, and social equity.",
       moreDetails: `Sustainable development ensures that we meet the needs of the present without compromising future generations. It involves balancing economic growth, environmental protection, and social equity. By integrating sustainable practices into everyday life, we can create a more resilient society for future generations while preserving the planet's ecosystems. Sustainable development is an approach that integrates the idea of social inclusion, environmental protection, and economic growth. It encourages businesses and governments to be mindful of the long-term impacts of their decisions on the environment and society. Sustainable development emphasizes clean energy, sustainable agriculture, green building practices, and equitable distribution of resources. By ensuring that we use resources wisely, we help reduce inequality and promote a sustainable future. This approach is crucial as it helps in reducing poverty, ensuring health and education, and ultimately achieving peace and stability in a globally connected world.`,
     },
