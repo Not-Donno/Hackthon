@@ -100,7 +100,7 @@ const Goal = () => {
             <p>Reduce energy consumption by using energy-efficient appliances and technologies.</p>
           </div>
           <div className="solution-card bg-[#415a77] p-5 rounded-lg cursor-pointer shadow-lg transition-transform duration-300 transform hover:scale-105 hover:bg-[#00b4d8] hover:text-white">
-            <h3 className="text-xl mb-2">🌊 Ocean Conservation</h3>
+            <h3 className="text-xl mb-2">🌊 Ocean Conservation </h3>
             <p>Protect marine ecosystems by reducing plastic pollution and supporting marine life restoration.</p>
           </div>
         </div>
