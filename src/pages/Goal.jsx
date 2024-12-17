@@ -46,7 +46,7 @@ const Goal = () => {
   return (
     <>
     <div className="bg-green-600 text-white font-['Poppins'] relative">
-      <header className="h-screen flex justify-between items-center px-[5%] bg-gradient-to-b from-[#54c57f] to-[#4fea2c] relative z-10">
+      <header className="h-screen flex justify-between items-center px-[5%] bg-gradient-to-b from-[#54c57f] to-[#4fea2c] relative">
         <div className="max-w-[40%] z-10">
           <h1 className="text-6xl mb-4">Protect Our Planet</h1>
           <p className="text-lg mb-5">
