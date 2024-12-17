@@ -59,7 +59,7 @@ const Home = () => {
         camera={{ near: 0.1, far: 1000 }}
       >
         <Suspense fallback={<Loader />}>
-          <directionalLight position={[10, 1, 1]} intensity={2} />
+          <directionalLight position={[10, 1, 1]} intensity={2} /> 
           <ambientLight intensity={0.5} />
           <hemisphereLight skyColor="#b1eff" groundColor="#000000" intensity={1} />
 
