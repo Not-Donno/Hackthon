@@ -57,49 +57,73 @@ const Solution = () => {
   const closeModal = () => setSelectedSolution(null);
 
   return (
-    <div className="bg-gradient-to-br from-green-50 to-gray-100 p-8 sm:p-16 min-h-screen">
-      {/* Header */}
-      <header className="text-center mb-12">
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-800 leading-tight bg-gradient-to-r from-green-500 to-blue-500 text-transparent bg-clip-text">
-          Solutions to Environmental Problems
-        </h1>
-        <p className="mt-4 text-lg text-gray-600">Together, we can create a better, greener future.</p>
-      </header>
+    <div className="bg-gradient-to-br from-green-50 to-gray-100 min-h-screen">
+      {/* Hero Section */}
+      <section className="relative bg-[url('https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center h-screen flex items-center justify-center">
+  <div className="absolute inset-0 bg-black opacity-50"></div>
+  <div className="relative z-10 text-center text-white px-4">
+  <header className="text-center mb-12">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-800 leading-tight bg-gradient-to-r from-green-500 to-blue-500 text-transparent bg-clip-text">
+            Solutions to Environmental Problems
+          </h1>
+          <p className="mt-4 text-lg text-gray-600">
+            Together, we can create a better, greener future.
+          </p>
+        </header>
+    <a
+      href="#solutions"
+      className="inline-block px-6 py-3 bg-green-600 hover:bg-green-700 rounded-lg text-lg font-semibold transition"
+    >
+      Explore Solutions
+    </a>
+  </div>
+</section>
 
-      {/* Grid of Solutions */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-        {solutions.map((solution, index) => (
-          <div
-            key={index}
-            className="group bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl flex flex-col sm:flex-row"
-            onClick={() => handleClick(solution)}
-          >
-            {/* Image on Left */}
-            <div className="w-full sm:w-1/2">
-              <img
-                src={solution.image}
-                alt={solution.title}
-                className="w-full h-60 object-cover sm:h-full"
-              />
-            </div>
 
-            {/* Content on Right */}
-            <div className="p-6 flex flex-col justify-between w-full sm:w-1/2">
-              <h2 className="text-xl font-semibold text-gray-800 mb-2">
-                {solution.title}
-              </h2>
-              <p className="text-gray-700 mb-4">
-                {solution.description}
-              </p>
-              <button
-                onClick={() => handleClick(solution)}
-                className="self-start px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
-              >
-                See More
-              </button>
+      {/* Main Content */}
+      <div id="solutions" className="bg-gradient-to-br from-green-50 to-gray-100 p-8 sm:p-16">
+        {/* Header */}
+        <header className="text-center mb-12">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-800 leading-tight bg-gradient-to-r from-green-500 to-blue-500 text-transparent bg-clip-text">
+            Solutions to Problems
+          </h1>
+        </header>
+
+        {/* Grid of Solutions */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+          {solutions.map((solution, index) => (
+            <div
+              key={index}
+              className="group bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl flex flex-col sm:flex-row"
+              onClick={() => handleClick(solution)}
+            >
+              {/* Image on Left */}
+              <div className="w-full sm:w-1/2">
+                <img
+                  src={solution.image}
+                  alt={solution.title}
+                  className="w-full h-60 object-cover sm:h-full"
+                />
+              </div>
+
+              {/* Content on Right */}
+              <div className="p-6 flex flex-col justify-between w-full sm:w-1/2">
+                <h2 className="text-xl font-semibold text-gray-800 mb-2">
+                  {solution.title}
+                </h2>
+                <p className="text-gray-700 mb-4">
+                  {solution.description}
+                </p>
+                <button
+                  onClick={() => handleClick(solution)}
+                  className="self-start px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
+                >
+                  See More
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
       {/* Modal */}
